@@ -1,3 +1,4 @@
+import 'package:bike_sharing/features/onboarding/ui/components/index.dart';
 import 'package:bike_sharing/shared/widgets/index.dart';
 import 'package:flutter/material.dart';
 
@@ -13,26 +14,21 @@ class OnboardingScreenTwo extends StatelessWidget {
         children: [
           Stack(
             children: [
-              Container(
-                margin: EdgeInsets.only(top: size.height / 42),
-                width: double.maxFinite,
-                height: size.height / 1.3,
-                decoration: const BoxDecoration(
-                  image: DecorationImage(
-                    image: AssetImage('assets/icons/background_pattern.png'),
-                  ),
-                ),
+              BackgroundPattern(
+                size: size,
+                pattern: 'assets/icons/background_pattern.png',
+
               ),
               Positioned(
                 left: size.width / 12,
                 right: size.width / 12,
-                bottom: size.width / 5,
-                child: CustomSVG(svg: 'assets/icons/only_cycle.svg'),
+                bottom: size.width / 10,
+                child: const CustomSVG(svg: 'assets/icons/only_cycle.svg'),
               ),
               Positioned(
                 left: 0,
                 right: size.width / 2.8,
-                bottom: size.height / 12,
+                bottom: size.height / 25,
                 child: CustomSVG(svg: 'assets/icons/phone_qr.svg',width: size.width/ 3,),
               ),
             ],
@@ -43,34 +39,14 @@ class OnboardingScreenTwo extends StatelessWidget {
             size: 16,
           ),
           const Spacer(),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20,),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                CustomTextButton(
-                  title: 'Skip',
-                  onTap: (){},
-                ),
-                Wrap(
-                  children: List.generate(3, (index){
-                    return Container(
-                      margin: EdgeInsets.only(right: 10),
-                      height: 12,
-                      width: 12,
-                      decoration: BoxDecoration(
-                        color: index == 1? Color(0xff3D003E):Color(0xff3D003E).withOpacity(.1),
-                        borderRadius: BorderRadius.circular(100),
-                      ),
-                    );
-                  }),
-                ),
-                CustomTextButton(
-                  title: 'Next',
-                  onTap: (){},
-                ),
-              ],
-            ),
+          BottomPortion(
+            onboardingScreen: 1,
+            skip: (){
+              Navigator.pushNamedAndRemoveUntil(context, '/loginScreen', (route) => false);
+            },
+            next: () {
+              Navigator.pushNamedAndRemoveUntil(context, '/onboardingScreenThree', (route) => false);
+            },
           ),
           const Spacer(),
         ],

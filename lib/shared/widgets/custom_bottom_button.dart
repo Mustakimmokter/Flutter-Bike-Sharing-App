@@ -7,16 +7,18 @@ class CustomBottomButton extends StatelessWidget {
       required this.onPressed,
       this.titleColor,
       this.backgroundColor,
+        this.horizontalPadding = 20,
       });
 
   final String title;
   final VoidCallback onPressed;
   final Color? titleColor, backgroundColor;
+  final double? horizontalPadding;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 20),
+      margin: EdgeInsets.symmetric(horizontal: horizontalPadding!),
       width: double.maxFinite,
       decoration: BoxDecoration(
         color: backgroundColor,
